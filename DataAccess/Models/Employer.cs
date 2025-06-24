@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace DataAccess.Models
+public class Employer
 {
-    class Employer
-    {
-    }
+    public int EmployerId { get; set; }
+    public string Login { get; set; }
+    public string HashPassword { get; set; }
+    public string OrganizationName { get; set; }
+    public virtual ICollection<Vacancy> Vacancies { get; set; } = new HashSet<Vacancy>();
 }

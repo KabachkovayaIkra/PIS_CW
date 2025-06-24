@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
-namespace DataAccess.Models
+public class DataContext : DbContext
 {
-    class DataContext
-    {
-    }
+    public DataContext() : base("name=test222") { }
+
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<Employer> Employers { get; set; }
+    public DbSet<Manager> Managers { get; set; }
+    public DbSet<TypeOfBusiness> TypesOfBusiness { get; set; }
+    public DbSet<Vacancy> Vacancies { get; set; }
+    public DbSet<Deal> Deals { get; set; }
 }

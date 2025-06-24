@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataAccess.Abstractions
+﻿public interface IFacadeLogin
 {
-    interface IFacadeLogin
-    {
-    }
+    bool AuthManager(string login, string password);
+    bool AuthEmployer(string login, string password);
+    bool AuthEmployee(string login, string password);
 }

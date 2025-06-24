@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace DataAccess.Models
+public class TypeOfBusiness
 {
-    class TypeOfBusiness
-    {
-    }
+    public int TypeOfBusinessId { get; set; }
+    public string Name { get; set; }
+    public virtual ICollection<Vacancy> Vacancies { get; set; } = new HashSet<Vacancy>();
 }

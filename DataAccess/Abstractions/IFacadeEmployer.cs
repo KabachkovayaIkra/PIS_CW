@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace DataAccess.Abstractions
+public interface IFacadeEmployer
 {
-    interface IFacadeEmployer
-    {
-    }
+    int CreateVacancy(int employerId, string profession, int typeOfBusinessId, double salary, string info);
+    List<Vacancy> ListVacancies(int employerId);
+    List<TypeOfBusiness> ListBusinessTypes();
 }

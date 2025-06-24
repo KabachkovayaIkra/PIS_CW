@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace DataAccess.Abstractions
+public interface IFacadeEmployee
 {
-    interface IFacadeEmployee
-    {
-    }
+    List<Vacancy> SearchVacancies(string filter);
+    bool ApplyForVacancy(int employeeId, int vacancyId);
+    List<Deal> ListDealsForEmployee(int employeeId);
 }

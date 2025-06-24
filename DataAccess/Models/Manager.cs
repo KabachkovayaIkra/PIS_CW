@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace DataAccess.Models
+public class Manager
 {
-    class Manager
-    {
-    }
+    public int ManagerId { get; set; }
+    public string Login { get; set; }
+    public string HashPassword { get; set; }
+    public string FullName { get; set; }
+    public virtual ICollection<Deal> Deals { get; set; } = new HashSet<Deal>();
 }

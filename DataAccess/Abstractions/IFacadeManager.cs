@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace DataAccess.Abstractions
+public interface IFacadeManager
 {
-    interface IFacadeManager
-    {
-    }
+    List<Deal> ListDeals();
+    bool SignDeal(int dealId, DateTime dateOfSign);
+    void UpdateVacancy(int vacancyId, string info, string status);
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataAccess.Abstractions
+﻿public interface IFacadeRegistration
 {
-    interface IFacadeRegistration
-    {
-    }
+    int RegisterManager(string login, string password, string name);
+    int RegisterEmployer(string login, string password, string orgName);
+    int RegisterEmployee(string login, string password, string firstName, string lastName, string middleName);
 }
