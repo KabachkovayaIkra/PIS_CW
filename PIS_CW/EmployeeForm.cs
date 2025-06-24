@@ -16,5 +16,25 @@ namespace PIS_CW
         {
             InitializeComponent();
         }
+
+        private void btnSaveChanges_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnApplyForVacancy_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

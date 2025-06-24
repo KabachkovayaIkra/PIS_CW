@@ -16,5 +16,45 @@ namespace PIS_CW
         {
             InitializeComponent();
         }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSign_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDecline_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbEmployeeId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbDealStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnChangeVacancyStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbTables_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

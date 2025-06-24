@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace FacadeTest
 {
     [TestClass]
-    public class UnitTest1
+    public class Tests
     {
         [TestMethod]
         public void TestMethod1()
