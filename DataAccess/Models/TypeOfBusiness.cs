@@ -1,8 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class TypeOfBusiness
+namespace DataAccess.Models
 {
-    public int TypeOfBusinessId { get; set; }
-    public string Name { get; set; }
-    public virtual ICollection<Vacancy> Vacancies { get; set; } = new HashSet<Vacancy>();
+    [Table("public.types_of_business")]
+    public class TypeOfBusiness
+    {
+        [Key]
+        [Column("type_of_business_id")]
+        public int TypeOfBusinessId { get; set; }
+
+        [Column("type_of_business_name")]
+        public string TypeOfBusinessName { get; set; }
+    }
 }

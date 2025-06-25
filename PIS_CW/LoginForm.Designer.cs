@@ -43,6 +43,7 @@
             this.tb_Login.Name = "tb_Login";
             this.tb_Login.Size = new System.Drawing.Size(284, 20);
             this.tb_Login.TabIndex = 0;
+            this.tb_Login.Text = "manager1";
             // 
             // btn_Login
             // 
@@ -67,8 +68,10 @@
             // 
             this.tb_Password.Location = new System.Drawing.Point(37, 111);
             this.tb_Password.Name = "tb_Password";
+            this.tb_Password.PasswordChar = '*';
             this.tb_Password.Size = new System.Drawing.Size(284, 20);
             this.tb_Password.TabIndex = 0;
+            this.tb_Password.Text = "hashpass1";
             // 
             // lbl_Password
             // 

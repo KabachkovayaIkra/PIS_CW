@@ -33,11 +33,13 @@
             this.lbl_Login = new System.Windows.Forms.Label();
             this.tb_Password = new System.Windows.Forms.TextBox();
             this.tb_Login = new System.Windows.Forms.TextBox();
+            this.cbRole = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_Registration
             // 
-            this.btn_Registration.Location = new System.Drawing.Point(37, 155);
+            this.btn_Registration.Location = new System.Drawing.Point(37, 177);
             this.btn_Registration.Name = "btn_Registration";
             this.btn_Registration.Size = new System.Drawing.Size(284, 52);
             this.btn_Registration.TabIndex = 9;
@@ -77,12 +79,34 @@
             this.tb_Login.Size = new System.Drawing.Size(284, 20);
             this.tb_Login.TabIndex = 5;
             // 
+            // cbRole
+            // 
+            this.cbRole.FormattingEnabled = true;
+            this.cbRole.Items.AddRange(new object[] {
+            "Соискатель",
+            "Работодатель"});
+            this.cbRole.Location = new System.Drawing.Point(37, 150);
+            this.cbRole.Name = "cbRole";
+            this.cbRole.Size = new System.Drawing.Size(283, 21);
+            this.cbRole.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 134);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Роль";
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 219);
+            this.ClientSize = new System.Drawing.Size(362, 241);
+            this.Controls.Add(this.cbRole);
             this.Controls.Add(this.btn_Registration);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_Password);
             this.Controls.Add(this.lbl_Login);
             this.Controls.Add(this.tb_Password);
@@ -101,5 +125,7 @@
         private System.Windows.Forms.Label lbl_Login;
         private System.Windows.Forms.TextBox tb_Password;
         private System.Windows.Forms.TextBox tb_Login;
+        private System.Windows.Forms.ComboBox cbRole;
+        private System.Windows.Forms.Label label1;
     }
 }

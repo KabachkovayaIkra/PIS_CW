@@ -1,15 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Vacancy
+namespace DataAccess.Models
 {
-    public int VacancyId { get; set; }
-    public int EmployerId { get; set; }
-    public int TypeOfBusinessId { get; set; }
-    public string Profession { get; set; }
-    public double Salary { get; set; }
-    public string VacancyInfo { get; set; }
-    public string VacancyStatus { get; set; }
-    public virtual Employer Employer { get; set; }
-    public virtual TypeOfBusiness TypeOfBusiness { get; set; }
-    public virtual ICollection<Deal> Deals { get; set; } = new HashSet<Deal>();
+    [Table("public.vacancies")]
+    public class Vacancy
+    {
+        [Key]
+        [Column("vacancy_id")]
+        public int VacancyId { get; set; }
+
+        [Column("employer_id")]
+        public int EmployerId { get; set; }
+
+        [Column("profession")]
+        public string Profession { get; set; }
+
+        [Column("type_of_business_id")]
+        public int TypeOfBusinessId { get; set; }
+
+        [Column("salary")]
+        public decimal Salary { get; set; }
+
+        [Column("vacancy_info")]
+        public string VacancyInfo { get; set; }
+
+        [Column("vacancy_status")]
+        public string VacancyStatus { get; set; }
+    }
 }

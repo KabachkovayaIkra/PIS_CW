@@ -7,24 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataAccess;
 
 namespace PIS_CW
 {
     public partial class ManagerForm: Form
     {
-        public ManagerForm()
+        private readonly FacadeDatabase _facade;
+        public ManagerForm(FacadeDatabase facade)
         {
             InitializeComponent();
+            _facade = facade;
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
 
         private void btnSign_Click(object sender, EventArgs e)

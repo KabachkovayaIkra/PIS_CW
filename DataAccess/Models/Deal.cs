@@ -1,16 +1,32 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Deal
+namespace DataAccess.Models
 {
-    public int DealId { get; set; }
-    public int EmployeeId { get; set; }
-    public int EmployerId { get; set; }
-    public int VacancyId { get; set; }
-    public int ManagerId { get; set; }
-    public DateTime? DateOfSigning { get; set; }
+    [Table("public.deals")]
+    public class Deal
+    {
+        [Key]
+        [Column("deal_id")]
+        public int DealId { get; set; }
 
-    public virtual Employee Employee { get; set; }
-    public virtual Employer Employer { get; set; }
-    public virtual Vacancy Vacancy { get; set; }
-    public virtual Manager Manager { get; set; }
+        [Column("employee_id")]
+        public int EmployeeId { get; set; }
+
+        [Column("employer_id")]
+        public int EmployerId { get; set; }
+
+        [Column("vacancy_id")]
+        public int VacancyId { get; set; }
+
+        [Column("commission")]
+        public decimal Commission { get; set; }
+
+        [Column("deal_status")]
+        public string DealStatus { get; set; }
+
+        [Column("date_of_signing")]
+        public DateTime DateOfSigning { get; set; }
+    }
 }

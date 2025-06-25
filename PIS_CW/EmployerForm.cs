@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataAccess;
 
 namespace PIS_CW
 {
     public partial class EmployerForm: Form
     {
-        public EmployerForm()
+        private readonly FacadeDatabase _facade;
+        public EmployerForm(FacadeDatabase facade)
         {
             InitializeComponent();
+            _facade = facade;
         }
 
         private void btnSaveChanges_Click(object sender, EventArgs e)
@@ -24,12 +27,12 @@ namespace PIS_CW
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
 
         private void btnAddVacancy_Click(object sender, EventArgs e)

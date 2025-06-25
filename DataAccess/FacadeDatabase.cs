@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using DataAccess.Models;
+using static System.Collections.Specialized.BitVector32;
 
 namespace DataAccess
 {
@@ -27,17 +30,10 @@ namespace DataAccess
             => db.Employees.Any(e => e.Login == login && e.HashPassword == password);
 
         // ===== REGISTRATION =====
-        public int RegisterManager(string login, string password, string name)
-        {
-            var m = new Manager { Login = login, HashPassword = password, FullName = name };
-            db.Managers.Add(m);
-            db.SaveChanges();
-            return m.ManagerId;
-        }
 
         public int RegisterEmployer(string login, string password, string orgName)
         {
-            var e = new Employer { Login = login, HashPassword = password, OrganizationName = orgName };
+            var e = new Employer { Login = login, HashPassword = password};
             db.Employers.Add(e);
             db.SaveChanges();
             return e.EmployerId;
@@ -59,7 +55,7 @@ namespace DataAccess
         }
 
         // ===== EMPLOYER OPERATIONS =====
-        public int CreateVacancy(int empId, string prof, int tbi, double sal, string info)
+        public int CreateVacancy(int empId, string prof, int tbi, decimal sal, string info)
         {
             var v = new Vacancy
             {
@@ -77,7 +73,7 @@ namespace DataAccess
 
         public List<Vacancy> ListVacancies(int employerId)
         {
-            return db.Vacancies.Include(v => v.TypeOfBusiness)
+            return db.Vacancies.Include(v => v.TypeOfBusinessId)
                                .Where(v => v.EmployerId == employerId)
                                .ToList();
         }
@@ -90,7 +86,7 @@ namespace DataAccess
         // ===== EMPLOYEE OPERATIONS =====
         public List<Vacancy> SearchVacancies(string filter)
         {
-            IQueryable<Vacancy> q = db.Vacancies.Include(v => v.Employer).Include(v => v.TypeOfBusiness);
+            IQueryable<Vacancy> q = db.Vacancies.Include(v => v.EmployerId).Include(v => v.TypeOfBusinessId);
             if (!string.IsNullOrWhiteSpace(filter))
                 q = q.Where(v => v.Profession.Contains(filter) || v.VacancyInfo.Contains(filter));
             return q.ToList();
@@ -112,8 +108,7 @@ namespace DataAccess
                 EmployeeId = empId,
                 EmployerId = vac.EmployerId,
                 VacancyId = vacId,
-                ManagerId = 0,
-                DateOfSigning = null
+                DateOfSigning = DateTime.Now
             };
 
             db.Deals.Add(deal);
@@ -124,9 +119,8 @@ namespace DataAccess
         public List<Deal> ListDealsForEmployee(int empId)
         {
             return db.Deals
-                     .Include(d => d.Vacancy)
-                     .Include(d => d.Employer)
-                     .Include(d => d.Manager)
+                     .Include(d => d.VacancyId)
+                     .Include(d => d.EmployerId)
                      .Where(d => d.EmployeeId == empId)
                      .ToList();
         }
@@ -135,23 +129,20 @@ namespace DataAccess
         public List<Deal> ListDeals()
         {
             return db.Deals
-                     .Include(d => d.Vacancy)
-                     .Include(d => d.Employer)
-                     .Include(d => d.Employee)
-                     .Include(d => d.Manager)
+                     .Include(d => d.VacancyId)
+                     .Include(d => d.EmployerId)
+                     .Include(d => d.EmployeeId)
                      .ToList();
         }
 
         public bool SignDeal(int dealId, DateTime dateOfSign)
         {
             var d = db.Deals.Find(dealId);
-            if (d == null || d.ManagerId != 0) return false;
 
             // пример выбора менеджера - берём первого
             var mgr = db.Managers.FirstOrDefault();
             if (mgr == null) return false;
 
-            d.ManagerId = mgr.ManagerId;
             d.DateOfSigning = dateOfSign;
             db.SaveChanges();
             return true;
@@ -164,6 +155,70 @@ namespace DataAccess
             v.VacancyInfo = info;
             v.VacancyStatus = status;
             db.SaveChanges();
+        }
+        public bool TryLogin(string login, string password, out string role)
+        {
+            var manager = db.Managers.FirstOrDefault(m => m.Login == login && m.HashPassword == password);
+            if (manager != null)
+            {
+                role = "Manager";
+                return true;
+            }
+
+            var employee = db.Employees.FirstOrDefault(e => e.Login == login && e.HashPassword == password);
+            if (employee != null)
+            {
+                role = "Employee";
+                return true;
+            }
+
+            var employer = db.Employers.FirstOrDefault(e => e.Login == login && e.HashPassword == password);
+            if (employer != null)
+            {
+                role = "Employer";
+                return true;
+            }
+
+            role = null;
+            return false;
+        }
+
+        public bool TryRegister(string login, string password, string role)
+        {
+            if (role == "Соискатель")
+            {
+                if (db.Employees.Any(e => e.Login == login))
+                    return false;
+
+                var employee = new Employee
+                {
+                    Login = login,
+                    HashPassword = password,
+                    FirstName = "",
+                    LastName = "",
+                    MiddleName = ""
+                };
+                db.Employees.Add(employee);
+                db.SaveChanges();
+                return true;
+            }
+            else if (role == "Работодатель")
+            {
+                if (db.Employers.Any(e => e.Login == login))
+                    return false;
+
+                var employer = new Employer
+                {
+                    Login = login,
+                    HashPassword = password,
+                    CompanyName = ""
+                };
+                db.Employers.Add(employer);
+                db.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }

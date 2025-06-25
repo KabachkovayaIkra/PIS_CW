@@ -1,8 +1,9 @@
 ﻿using System.Data.Entity;
+using DataAccess.Models;
 
 public class DataContext : DbContext
 {
-    public DataContext() : base("name=test222") { }
+    public DataContext() : base("name=test22") { }
 
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Employer> Employers { get; set; }
