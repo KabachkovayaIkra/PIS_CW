@@ -18,6 +18,10 @@ namespace DataAccess
         {
             db = new DataContext();
         }
+        public FacadeDatabase(DataContext context)
+        {
+            db = context;
+        }
 
         // ===== AUTH =====
         public bool AuthManager(string login, string password)
